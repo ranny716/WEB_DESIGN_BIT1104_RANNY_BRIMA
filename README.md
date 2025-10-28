@@ -11,7 +11,8 @@ ASSIGNMENT 1
 ![WhatsApp Image 2025-10-26 at 12 03 01](https://github.com/user-attachments/assets/8fd4378e-2747-4ee5-9b13-e19f74b7eb7c)
 
 ## CONTACT US
-![WhatsApp Image 2025-10-26 at 12 03 02 (3)](https://github.com/user-attachments/assets/c62bb0be-56a8-42fa-b75e-ae9c44619ecc)
+![WhatsApp Image 2025-10-26 at 12 03 02 (2)](https://github.com/user-attachments/assets/901973cd-c547-4714-b183-33d76b60c7ff)
+
 
 ## ABOUT US
 ![WhatsApp Image 2025-10-26 at 12 03 02 (2)](https://github.com/user-attachments/assets/45126286-f397-4fa8-9121-ff44a5b16569)
