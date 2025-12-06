@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Players – Football Hub Sierra Leone</title>
+
+  <!-- =========  INLINE CSS – NO EXTERNAL FILES  ========= -->
+  <style>
+    /* ---------- ROOT & PALETTE ---------- */
+    :root{
+      --primary-100:#ebf4ff;
+      --primary-500:#3498db;
+      --primary-700:#1e3c72;
+      --accent-finished:#27ae60;
+      --dark:#2c3e50;
+      --grey:#7f8c8d;
+      --light:#f5f7fa;
+      --white:#ffffff;
+      --shadow:0 8px 25px rgba(0,0,0,.1);
+      --shadow-hover:0 15px 35px rgba(0,0,0,.15);
+    }
+
+    /* ---------- GLOBAL RESET ---------- */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+    body{background:linear-gradient(135deg,var(--light) 0%,#c3cfe2 100%);min-height:100vh;color:var(--dark);line-height:1.6;}
+
+    /* ---------- HEADER ---------- */
+    .top-bar{background:linear-gradient(135deg,var(--primary-700) 0%,var(--primary-500) 100%);color:var(--white);padding:1rem 0;position:sticky;top:0;z-index:1000;box-shadow:0 2px 5px rgba(0,0,0,.1);}
+    .container{max-width:1200px;margin:0 auto;padding:0 1rem;display:flex;justify-content:space-between;align-items:center;}
+    .logo{font-size:1.5rem;font-weight:bold;display:flex;align-items:center;gap:.5rem;}
+    .nav-list{list-style:none;display:flex;gap:1.5rem;}
+    .nav-list a{color:var(--white);font-weight:500;transition:color .3s;}
+    .nav-list a:hover,.nav-list a.active{color:#ffd700;}
+
+    /* ---------- PAGE TITLE ---------- */
+    .page-title{text-align:center;font-size:2.5rem;margin:2rem 0;text-shadow:2px 2px 4px rgba(0,0,0,.1);}
+
+    /* ---------- FILTER BAR ---------- */
+    .search-filter-bar{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;justify-content:center;max-width:900px;margin-left:auto;margin-right:auto;}
+    .search-box,.filter-select{flex:1 1 200px;padding:.8rem 1rem;border:none;border-radius:25px;font-size:1rem;box-shadow:0 4px 15px rgba(0,0,0,.1);transition:box-shadow .3s;}
+    .search-box:focus,.filter-select:focus{outline:none;box-shadow:0 6px 20px rgba(0,0,0,.15);}
+
+    /* ---------- PLAYERS GRID ---------- */
+    .players-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem;padding:0 1rem;}
+    .player-card{background:var(--white);border-radius:15px;padding:1.5rem;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
+    .player-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);}
+    .player-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary-500),var(--accent-finished));}
+    .player-nationality{position:absolute;top:1rem;right:1rem;font-size:1.5rem;opacity:.7;}
+
+    /* ---------- PLAYER HEADER ---------- */
+    .player-header{display:flex;align-items:center;margin-bottom:1rem;}
+    .player-img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid var(--primary-500);margin-right:1rem;}
+    .player-name{font-size:1.3rem;font-weight:600;color:var(--dark);}
+    .player-meta{display:flex;gap:1rem;font-size:.85rem;color:var(--grey);margin-top:.3rem;}
+    .meta-item{background:var(--primary-100);padding:.2rem .6rem;border-radius:12px;}
+
+    /* ---------- TEAM ROW ---------- */
+    .player-team{display:flex;align-items:center;margin-bottom:1rem;padding:.5rem;background:#f8f9fa;border-radius:8px;}
+    .team-badge{width:30px;height:30px;background:linear-gradient(45deg,#e74c3c,#c0392b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--white);margin-right:.5rem;}
+    .team-name{font-weight:500;color:var(--dark);}
+
+    /* ---------- ACTION BUTTONS ---------- */
+    .player-actions{display:flex;gap:.5rem;}
+    .action-btn{flex:1;padding:.6rem;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.8rem;transition:all .3s;}
+    .btn-primary{background:var(--primary-500);color:var(--white);}
+    .btn-secondary{background:#ecf0f1;color:var(--dark);}
+    .action-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2);}
+
+    /* ---------- FOOTER ---------- */
+    footer{background:var(--primary-700);color:var(--white);text-align:center;padding:2rem;margin-top:3rem;}
+    .social-links{margin-top:1rem;display:flex;justify-content:center;gap:1rem;font-size:1.5rem;}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width:768px){
+      .nav-list{gap:1rem;font-size:.9rem;}
+      .page-title{font-size:2rem;}
+      .search-filter-bar{flex-direction:column;}
+    }
+  </style>
+</head>
+
+<body>
+<!-- ==============  HEADER  ============== -->
+<header class="top-bar">
+  <div class="container">
+    <div class="logo">⚽ Football Hub <span>Sierra Leone</span></div>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="players.html" class="active">Players</a></li>
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ==============  PLAYERS  ============== -->
+<main>
+  <h1 class="page-title"> Players</h1>
+
+ 
+  <!-- players grid -->
+  <div class="players-grid" id="playersGrid">
+    <!-- =====  PLAYER CARDS  ===== -->
+    <div class="player-card" data-name="Joseph kamara" data-position="midfielder" data-team="Daabu Fc" data-nationality="Sierra Leonean">
+      <div class="player-nationality">SL</div>
+      <div class="player-header">
+        <img src="https://i.pinimg.com/736x/83/9e/96/839e966e541e739a0d120540c18a544e.jpg" alt="Joseph Kamara" class="player-img">
+        <div class="player-info">
+          <div class="player-name">Joseph Kamara</div>
+          <div class="player-meta">
+            <span class="meta-item">⚽ Midfielder</span>
+            <span class="meta-item">🎂 20 yrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-team">
+        <div class="team-badge">DB</div>
+        <div class="team-name">Daabu FC</div>
+      </div>
+     
+    <div class="player-card" data-name="Andrew Konneh" data-position="forward" data-team="Daabu Fc" data-nationality="Sierra Leonean">
+      <div class="player-nationality">SL</div>
+      <div class="player-header">
+        <img src="https://i.pinimg.com/736x/ed/55/4e/ed554e51ef926ae43369af2c6089d151.jpg" alt="Andrew Konneh" class="player-img">
+        <div class="player-info">
+          <div class="player-name">Andrew Konneh</div>
+          <div class="player-meta">
+            <span class="meta-item">🎯 Forward</span>
+            <span class="meta-item">🎂 21 yrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-team">
+        <div class="team-badge">DB</div>
+        <div class="team-name">Daabu FC</div>
+      </div>
+    
+
+    <div class="player-card" data-name="George Smith" data-position="forward" data-team="Daabu FC" data-nationality="Sierra Leonean">
+      <div class="player-nationality">Sl</div>
+      <div class="player-header">
+        <img src="https://i.pinimg.com/736x/6e/4e/52/6e4e52c0131388087f0a3f6c3d2fb58c.jpg" alt="George Smith" class="player-img">
+        <div class="player-info">
+          <div class="player-name">George Smith</div>
+          <div class="player-meta">
+            <span class="meta-item">🎯 Forward</span>
+            <span class="meta-item">🎂 19 yrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-team">
+        <div class="team-badge">DB</div>
+        <div class="team-name">Daabu FC</div>
+      </div>
+     
+
+    <div class="player-card" data-name="Prince Harding" data-position="forward" data-team="Daabu FC" data-nationality="Sierra Leonean">
+      <div class="player-nationality">SL</div>
+      <div class="player-header">
+        <img src="https://i.pinimg.com/736x/a3/ea/55/a3ea5521d05ce0f8db01498fa4f603e8.jpg" alt="Prince Harding" class="player-img">
+        <div class="player-info">
+          <div class="player-name">Prince Harding</div>
+          <div class="player-meta">
+            <span class="meta-item">🎯 Forward</span>
+            <span class="meta-item">🎂 19 yrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-team">
+        <div class="team-badge">DB</div>
+        <div class="team-name">Daabu FC</div>
+      </div>
+      
+    <div class="player-card" data-name="Sullay Kaikai" data-position="defender" data-team="Daabu FC" data-nationality="Sierra Leonean">
+      <div class="player-nationality">SL</div>
+      <div class="player-header">
+        <img src="https://pbs.twimg.com/profile_images/1683569250005315587/zF68-Rtf_400x400.jpg" alt="Sullay Kaikai" class="player-img">
+        <div class="player-info">
+          <div class="player-name">Sullay Kaikai</div>
+          <div class="player-meta">
+            <span class="meta-item">🛡️ Defender</span>
+            <span class="meta-item">🎂 20 yrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-team">
+        <div class="team-badge">DB</div>
+        <div class="team-name">Daabu FC</div>
+      </div>
+
+    <div class="player-card" data-name="David Kawa" data-position="defender" data-team="Daabu FC" data-nationality="Sierra Leonean">
+      <div class="player-nationality">SL</div>
+      <div class="player-header">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT24kpGimu0ax7YBiAiEtaRb6Dgys_RN_qO0w&s" alt="David Kawa" class="player-img">
+        <div class="player-info">
+          <div class="player-name">David Kawa</div>
+          <div class="player-meta">
+            <span class="meta-item">🛡️ Defender</span>
+            <span class="meta-item">🎂 20 yrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-team">
+        <div class="team-badge">DB</div>
+        <div class="team-name">Daabu FC</div>
+      </div>
+    
+  <!-- /players-grid -->
+</main>
+
+<!-- ==============  FOOTER  ============== -->
+<footer>
+  <p>&copy; 2025 Football Hub Sierra Leone. All rights reserved.</p>
+  <div class="social-links">
+    <a href="#" aria-label="Facebook">📘</a>
+    <a href="#" aria-label="Twitter">🐦</a>
+    <a href="#" aria-label="Instagram">📷</a>
+    <a href="#" aria-label="YouTube">▶️</a>
+  </div>
+</footer>
+</body>
+</html>

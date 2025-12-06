@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Matches - Football Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .matches-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab.active {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .match-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .match-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .live {
+            background: #e74c3c;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .upcoming {
+            background: #f39c12;
+            color: white;
+        }
+
+        .finished {
+            background: #27ae60;
+            color: white;
+        }
+
+        .match-league {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .team-name {
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .vs {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #34495e;
+            margin: 0 1rem;
+        }
+
+        .match-score {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .match-time {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .match-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .no-matches {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .matches-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+            
+            .tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matches-container">
+        <h1 class="page-title"> Live Matches</h1>
+
+
+        <div class="matches-grid" id="matchesGrid">
+
+
+            <!-- Upcoming Match -->
+            <div class="match-card" data-status="upcoming">
+                <span class="match-status upcoming">Upcoming</span>
+                <div class="match-league"> Mambo League</div>
+                <div class="match-teams">
+                    <div class="team">
+                        <div class="team-logo"></div>
+                        <div class="team-name">Daabu FC</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <div class="team-logo"></div>
+                        <div class="team-name">Brima Sahr Amara FC</div>
+                    </div>
+                </div>
+                <div class="match-score">
+                    <div class="score">-</div>
+                    <div class="match-time">December 14 20:00 GMT</div>
+                </div>
+        
+
+            
+
+            <!-- Finished Match -->
+            <div class="match-card" data-status="finished">
+                <span class="match-status finished">Finished</span>
+                <div class="match-league">Mambo League</div>
+                <div class="match-teams">
+                    <div class="team">
+                        <div class="team-logo"></div>
+                        <div class="team-name">Daabu FC</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <div class="team-logo"></div>
+                        <div class="team-name">Kai FC</div>
+                    </div>
+                </div>
+                <div class="match-score">
+                    <div class="score">3 - 2</div>
+                    <div class="match-time">Full Time - 90+4'</div>
+                </div>
+               
+
+            <!-- Upcoming Match -->
+            <div class="match-card" data-status="upcoming">
+                <span class="match-status upcoming">Upcoming</span>
+                <div class="match-league">Mambo League</div>
+                <div class="match-teams">
+                    <div class="team">
+                        <div class="team-logo"></div>
+                        <div class="team-name">Daabu FC</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team">
+                        <div class="team-logo"></div>
+                        <div class="team-name">Kovel FC</div>
+                    </div>
+                </div>
+                <div class="match-score">
+                    <div class="score">-</div>
+                    <div class="match-time">December 16 19:45 GMT</div>
+                </div>
+            
+    <script>
+        function filterMatches(status) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter matches
+            const matches = document.querySelectorAll('.match-card');
+            const noMatches = document.getElementById('noMatches');
+            let visibleMatches = 0;
+
+            matches.forEach(match => {
+                if (status === 'all' || match.dataset.status === status) {
+                    match.style.display = 'block';
+                    visibleMatches++;
+                } else {
+                    match.style.display = 'none';
+                }
+            });
+
+            // Show/hide no matches message
+            noMatches.style.display = visibleMatches === 0 ? 'block' : 'none';
+        }
+
+        // Simulate live score updates
+        function updateLiveScores() {
+            const liveMatches = document.querySelectorAll('[data-status="live"] .score');
+            liveMatches.forEach(score => {
+                if (Math.random() > 0.8) { // 20% chance to update
+                    const scores = score.textContent.split(' - ');
+                    const homeScore = parseInt(scores[0]);
+                    const awayScore = parseInt(scores[1]);
+                    
+                    if (Math.random() > 0.5) {
+                        score.textContent = `${homeScore + 1} - ${awayScore}`;
+                    } else {
+                        score.textContent = `${homeScore} - ${awayScore + 1}`;
+                    }
+                    
+                    // Flash effect
+                    score.style.color = '#e74c3c';
+                    setTimeout(() => {
+                        score.style.color = '#2c3e50';
+                    }, 1000);
+                }
+            });
+        }
+
+        // Update live scores every 30 seconds
+        setInterval(updateLiveScores, 30000);
+
+        // Add click handlers for action buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('action-btn')) {
+                const action = e.target.textContent.trim();
+                
+                // Create notification
+                const notification = document.createElement('div');
+                notification.textContent = `${action} clicked!`;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #3498db;
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        });
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

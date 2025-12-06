@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Football Club</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Mission and Vision */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .team-member:hover {
+            background: #e9ecef;
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 4px solid #4CAF50;
+        }
+
+        .team-member h4 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .stat-card h3 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav li {
+                margin: 0.5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>⚽ Football Club</h1>
+            <p>Passion • Excellence • Community</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#mission">Mission & Vision</a></li>
+                <li><a href="#history">Our History</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="#values">Our Values</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- About Section -->
+            <section id="about" class="section">
+                <h2>About Football Club</h2>
+                <p>Welcome to Football Club, where passion meets excellence on and off the field. Founded in 2021, we are more than just a football club – we are a community of dedicated players, coaches, and supporters united by our love for the beautiful game.</p>
+                
+                <p>Our club has grown from humble beginnings to become one of the most respected football institutions in the region. We pride ourselves on developing talented players, fostering sportsmanship, and creating an inclusive environment where everyone can thrive.</p>
+                
+                <p>With state-of-the-art facilities, experienced coaching staff, and a commitment to excellence, we offer programs for all ages and skill levels – from youth academies to professional teams, from recreational leagues to competitive tournaments.</p>
+            </section>
+
+            <!-- Mission & Vision Section -->
+            <section id="mission" class="section">
+                <h2>Our Mission & Vision</h2>
+                <div class="mission-vision">
+                    <div class="card">
+                        <h3> Our Mission</h3>
+                        <p>To develop skilled, confident, and respectful football players while fostering a love for the game that extends beyond the field. We are committed to providing quality training, promoting teamwork, and building character through sport.</p>
+                    </div>
+                    <div class="card">
+                        <h3> Our Vision</h3>
+                        <p>To be recognized as the leading football club that nurtures talent, champions sportsmanship, and creates lasting positive impact in our community. We envision a future where every player reaches their full potential.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section id="history" class="section">
+                <h2>Our History</h2>
+                <p>Founded in 2021 by a group of passionate football enthusiasts, our club started with just one team and a dream. Over the past 4 years, we have grown exponentially, expanding our programs and facilities to accommodate thousands of players.</p>
+                
+                <h3>Key Milestones:</h3>
+                <p><strong>2021:</strong> Club founded with initial team of 20 players</p>
+                <p><strong>2021:</strong> Launched youth academy program</p>
+                <p><strong>2022:</strong> Opened our first dedicated training facility</p>
+                <p><strong>2022:</strong> Won first national championship</p>
+                <p><strong>2024:</strong> Celebrated 25 years of excellence</p>
+                <p><strong>2025:</strong> Launched community outreach initiative</p>
+            </section>
+
+            <!-- Team Section -->
+            <section id="team" class="section">
+                <h2>Meet Our Team</h2>
+                <p>Our success is built on the dedication and expertise of our coaching staff and management team. Each member brings unique skills and experience to help our players reach their full potential.</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://i.pinimg.com/736x/47/81/2b/47812b5b234aaf93a1de9b5bef4b1052.jpg" alt="John Kamara">
+                        <h4>John Smith</h4>
+                        <p>Head Coach</p>
+                        <p>CAF Pro License | 15+ years experience</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://i.pinimg.com/736x/d1/68/bb/d168bbc8cf2815780d4c23269f9c3aef.jpg" alt="Mohammed Johnson">
+                        <h4>Mohamed Sahr Jusu</h4>
+                        <p>Youth Academy Director</p>
+                        <p>Former Professional Player | Youth Development Expert</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://i.pinimg.com/736x/82/67/7e/82677ee614be93a0b144eab0fbc6bd7e.jpg" alt="Mike Kargbo">
+                        <h4>Mike Kargbo</h4>
+                        <p>Technical Director</p>
+                        <p>Sports Science Degree | Performance Specialist</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://i.pinimg.com/1200x/7f/60/0a/7f600ab498786aa54b824203c89e13a9.jpg" alt="Ben Davis">
+                        <h4>Ibrahim Lavalie</h4>
+                        <p>Club Manager</p>
+                        <p>Business Administration | 10 years in sports management</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Values Section -->
+            <section id="values" class="section">
+                <h2>Our Core Values</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3>5oo</h3>
+                        <p>Players Trained</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>20</h3>
+                        <p>Professional Coaches</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>4</h3>
+                        <p>Years of Excellence</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>3+</h3>
+                        <p>Trophies Won</p>
+                    </div>
+                </div>
+                
+                <h3>What We Stand For:</h3>
+                <p><strong>Excellence:</strong> We strive for the highest standards in everything we do, from player development to community engagement.</p>
+                <p><strong>Integrity:</strong> We believe in fair play, honesty, and ethical behavior both on and off the field.</p>
+                <p><strong>Respect:</strong> We treat everyone with dignity and respect, regardless of their background, skill level, or role.</p>
+                <p><strong>Teamwork:</strong> We understand that success comes from working together, supporting each other, and celebrating collective achievements.</p>
+                <p><strong>Innovation:</strong> We embrace new ideas, technologies, and methods to continuously improve our programs and facilities.</p>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <h2>Get In Touch</h2>
+                <p>We'd love to hear from you! Whether you're interested in joining our club, partnering with us, or simply want to learn more about our programs, feel free to reach out.</p>
+                
+                <p><strong> Address:</strong> 12 Ranny Street, Mambo ,</p>
+                <p><strong> Phone:</strong> +232 76 569000</p>
+                <p><strong> Email:</strong> info@Dabbufc.com</p>
+                <p><strong> Website:</strong> www.Dabbufc.com</p>
+                <p><strong> Office Hours:</strong> Monday - Friday: 9:00 AM - 6:00 PM</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Football Club. All rights reserved.</p>
+            <p>Follow us on social media | <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a> | <a href="#">YouTube</a></p>
+        </div>
+    </footer>
+</body>
+</html>
